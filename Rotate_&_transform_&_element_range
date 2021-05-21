@@ -1,0 +1,88 @@
+==================================================================================
+4) transform(),rotate(),rotate_copy(),max(),min(),max_element(),min_element() -TC- O(n) for all except for max(),min() TC-O(1)
+---------------------------------------------------------------------------------
+ =>transform(InputIterator1 first,InputIterator1 last,OutputIterator result, UnaryPredicate pred);                     [Form-1]
+ =>transform(InputIterator1 first,InputIterator1 last,InputIterator2 first,OutputIterator result,BinaryPredicate pred) [Form-2]
+
+   Return Value : iterator
+   -return value is not important
+   -returns an iterator to the result pointing next of the last element.
+   -We can determinne the size of the transformed array by this if we want
+   
+ =>rotate(forwarditerator first,forwarditerator middle,forwarditerator last);
+ 
+   Return Value : void
+   -it makes the container starting from the middle element as the first element
+   -first to mid-1 element will be copied to the end
+   
+  =>rotate_copy(forwarditerator first, forwarditerator middle, forwarditerator last,OutputIterator result);
+   
+   Return Value : void
+   -it makes the container starting from the middle element as the first element
+   -first to mid-1 element will be copied to the end
+   =only difference is that ,it will do this in another specied output container,donot modify the existing array
+
+
+  =>max(const T& val1 , const T& val2)
+  
+    Return Value :const T&
+	-return the max between the two specified value.
+	
+  =>min(const T& val1, const T& val2)
+
+    Return Value: const T&
+	-return the min between the two specified value.
+	
+  =>max_element(forwarditerator first,forwarditerator last)               [Form-1]
+  =>max_element(forwarditerator first,forwarditerator last,Compare comp)  [Form-2]
+  
+    Return Value : forwarditerator
+	-return an iterator to the max element within the specified range according to different uses of Compare function [imp]
+	-if compare value return false for all , then the max-element condition is satisified,else min_element condition
+	
+  
+  =>min_element(forwarditerator first,forwarditerator last)               [Form-1]
+  =>min_element(forwarditerator first,forwarditerator last,Compare comp)  [Form-2]
+
+    Return Value : forwarditerator
+	-return an iterator to the min element within the specified range according to different uses of Compare function [imp]
+	-if compare value return false for all , then the max-element condition is satisified,else min_element condition
+  
+=================
+Example
+================
+
+#include<iostream>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<cstdio>
+#include<bits/stdc++.h>
+using namespace std;
+char fun(char i){return i-' ';}
+int add(int i,int j){return i+j;}
+int most_imp(int i,int j){return i>j;}
+int main()
+{
+    string s="anmol";
+    string p;
+    p.resize(s.size());
+    transform(s.begin(),s.end(),s.begin(), fun);
+    cout<<s<<endl; //ANMOL
+    transform(s.begin(),s.end(),s.begin(), ::toupper); // ::tolower
+    cout<<s<<endl; //ANMOL
+    int arr1[]={1,2,3,4};
+    int arr2[]={4,3,2,1};
+    transform(arr1,arr1+4,arr2,arr2,add);
+    for(int i=0;i<4;i++){cout<<arr2[i]<<" ";}cout<<endl; // 5 5 5 5
+    rotate(arr1,arr1+2,arr1+4);
+    for(int i=0;i<4;i++){cout<<arr1[i]<<" ";}cout<<endl; //3 4 1 2
+    rotate_copy(arr1,arr1+2,arr1+4,arr2);
+    for(int i=0;i<4;i++){cout<<arr2[i]<<" ";}cout<<endl;// 1 2 3 4
+    int mx=max(arr1[0],arr1[2]);
+    int mn=min(arr1[0],arr1[2]);
+    cout<<mx<<" "<<mn<<endl;//3  1
+    cout<<*max_element(arr1,arr1+4)<<endl;//4
+    cout<<*min_element(arr1,arr1+4,most_imp)<<endl;//4
+    return 0;
+}
