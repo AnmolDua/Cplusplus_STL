@@ -1,0 +1,54 @@
+Generic Algorithms
+-----------------------
+
+Concept:
+==================================================================================
+1)Binary Search Algorithm (TC : log(n)) [Precondition :Works on Sorted Containers]
+----------------------------------------------------------------------------------
+  =>binary_search(forwarditerator first,forwarditerator last,const T& val);               [Ist Form]
+  =>binary_search(forwarditerator first,forwarditerator last,const T& val, Compare comp); [2nd Form]
+  
+  Return Value : bool
+  -True -if the element is present
+  -False-if element is not present
+  
+  
+  =>upper_bound(forwarditerator first,forwarditerator last,const T& val);             [Ist Form]
+  =>upper_bound(forwarditerator first,forwarditerator last,const T& val,Compare comp) [2nd Form]
+  
+  Return Value : Iterator
+  -Iterator pointing to the element strictly greater than value.
+  -if no element strictly greater than the searched element -returns iterator to the end of the container.
+  -else return iterator to the next element of the container to the searched element.
+
+
+  =>lower_bound(forwarditerator first,forwarditerator last,const T& val);             [Ist Form]
+  =>lower_bound(forwarditerator first,forwarditerator last,const T& val,Compare comp) [2nd Form] 
+  
+  Return Value : Iterator
+  -Iterator pointing to the element greater than or equal to value.
+  -if no element strictly greater than or equal to the searched element -returns iterator to the end of the container.
+  -else return iterator to the first possible greater than or equal to the searched element.
+  
+=========
+Example:
+=========
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main()
+{
+int arr[] = {2,3,7,6,1,4};
+vector<int> v(arr,arr+6);
+sort(v.begin(),v.end());
+cout<<binary_search(v.begin(),v.end(),3)<<endl; //1
+cout<<binary_search(v.begin(),v.end(),7)<<endl; //0
+cout<<*(upper_bound(v.begin(),v.end(),3))<<endl;//4
+cout<<*(lower_bound(v.begin(),v.end(),3))<<endl;//3
+cout<<*(lower_bound(v.begin(),v.end(),5))<<endl;//6
+return 0;
+}
+
+
