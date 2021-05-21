@@ -1,0 +1,51 @@
+=================================================================
+2)count(),count_if(),find(),find_if() -(TC- O(n))
+----------------------------------------------------------------
+ =>count(InputIterator first,InputIterator last,const T& val);
+  
+    Return Value:signed_int (difference_type)
+   -return the count of the no of the passed element.
+
+ =>count(InputIterator first,InputIterator last,UnaryPredicate pred);
+ 
+    Return Value:signed_int (difference_type)
+   -return the count of the no of element that satisfy the unarypredicate condition
+  
+ =>find(InputIterator first ,InputIterator last, const T& val);
+  
+    Return Value:InputIterator
+   -return an iterator pointing to the first found element
+
+ =>find_if(InputIterator first, InputIterator last , UnaryPredicate pred);
+ 
+   Return Value:InputIterator
+   -return an iterator pointing to the first found element   
+       
+=========
+Example
+=========
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+bool isEven(int i){return (i%2==0);}
+
+int main()
+{
+    int arr[]={1,2,4,3,2,1,4,1,1};
+    cout<<count(arr,arr+9,2)<<endl; //2
+    cout<<count_if(arr,arr+9,isEven)<<endl; //4
+    vector<int> v(arr,arr+9);
+    //vector<int>::iterator it=find(v.begin(),v.end(),5); //Not Found
+    vector<int>::iterator it=find_if(v.begin(),v.end(),isEven); //Found
+    if(it!=v.end())
+        {
+            cout<<"Found"<<endl;
+        }
+    else
+        {
+            cout<<"Not Found"<<endl;
+        }
+    return 0;
+}
