@@ -5,6 +5,8 @@ Concept:
 ==================================================================================
 1)Binary Search Algorithm (TC : log(n)) [Precondition :Works on Sorted Containers]
 ----------------------------------------------------------------------------------
+Note:The way the container is sorted ,needs to be told to the container of the Binary Search (same comp method is passed to binary_search() ,as sort())
+
   =>binary_search(forwarditerator first,forwarditerator last,const T& val);               [Ist Form]
   =>binary_search(forwarditerator first,forwarditerator last,const T& val, Compare comp); [2nd Form]
   
