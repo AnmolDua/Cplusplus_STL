@@ -1,0 +1,60 @@
+==============================================================================
+3) reverse(),reverse_copy(),unique(),unique_copy() -(TC -O(n))
+------------------------------------------------------------------------------
+   =>reverse(BidirectionalIterator first,BidirectionalIterator last)
+   
+   Return Value:void
+   
+   Note : The functoin uses iter_swap algorithm to swap the elements to the new position
+        : reverses the paased container
+   
+   
+   =>reverse_copy(BidirectionalIterator first, BidirectionalIterator last, OutputIterator result)
+   
+   Return Value :void
+   
+   Note: Same as reverse ,but donot modify the existing container ,modified and save in the output container 
+   
+   
+   =>unique(forwarditerator first, forwarditerator last);
+   
+   Return Value : forwarditerator
+   - Removes consecutive duplicates from the range 
+   - Return an iterator to the next of the last element.
+   
+   Working :First element is copied as it is, then for second element : second element compared with first 
+            if same , skip and move on ,otherwise copy this element also.
+			
+   =>unique_copy(forwarditerator first, forwarditerator last, OutputIterator result);
+   
+   Return Value : forwarditerator
+   - Removes consecutive duplicates from the range 
+   - Return an iterator to the next of the last element.
+   
+   Working :First element is copied as it is, then for second element : second element compared with first 
+            if same , skip and move on ,otherwise copy this element also.
+
+			
+============
+Example
+============
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    int arr[]={1,1,2,2,3,3,3,4,5};
+    reverse(arr,arr+9);
+    for(int i=0;i<9;i++){cout<<arr[i]<<" ";}cout<<endl; //5 4 3 3 3 2 2 1 1
+    vector<int> v(9);
+    reverse_copy(arr,arr+9,v.begin());
+    for(int i=0;i<9;i++){cout<<arr[i]<<" ";}cout<<endl; //5 4 3 3 3 2 2 1 1
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){cout<<*it<<" ";}// 1 1 2 2 3 3 3 4 5
+    vector<int>::iterator it = unique(v.begin(),v.end());
+    v.resize(it-v.begin());
+    cout<<endl;
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){cout<<*it<<" ";}//1 2 3 4 5
+    return 0;
+}
